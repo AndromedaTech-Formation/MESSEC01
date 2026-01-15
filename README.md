@@ -1,7 +1,7 @@
 ![MESSEC01 Banner](https://i.ibb.co/LD9L4Dwz/Pasted-image-20251215142034.png)
 
 
-# MESSEC01 : Messagerie sécurisée et contrôle d'accès
+# ✉️ MESSEC01 : Messagerie sécurisée et contrôle d'accès
 **Mise en œuvre et sécurisation d’une messagerie électronique et instantanée – Fondamentaux, protocoles et défense en profondeur**
 
 **Durée :** 20 heures  
@@ -11,12 +11,11 @@
 
 ---
 
-## Description générale de la formation
+## 📚 Description générale de la formation
 
 Cette formation technique de 20 heures a pour objectif de permettre aux participants de **concevoir, déployer, configurer et sécuriser une solution de messagerie** (électronique et/ou instantanée) dans un contexte professionnel.
 
 Elle couvre :
-
 - les **principes fondamentaux des systèmes de messagerie**,
 - les **protocoles standards utilisés** (SMTP, POP3, IMAP, XMPP, etc.),
 - les **mécanismes de sécurité** appliqués à la messagerie (authentification, contrôle d’accès, chiffrement),
@@ -28,10 +27,9 @@ La formation est fortement orientée **mise en pratique**, avec de nombreux trav
 
 ---
 
-## Public cible
+## 👨‍🏫 Public cible
 
-Cette formation s’adresse à :
-
+Cette formation s’adresse aux :
 - Administrateurs systèmes et réseaux
 - Techniciens et ingénieurs IT
 - Responsables ou référents sécurité (RSSI, correspondants SSI)
@@ -42,7 +40,7 @@ Cette formation s’adresse à :
 
 ---
 
-## Objectifs pédagogiques
+## 🎯 Objectifs pédagogiques
 
 À l’issue de la formation, les participants seront capables de :
 
@@ -60,7 +58,7 @@ Cette formation s’adresse à :
 
 ---
 
-## Prérequis
+## 🧰 Prérequis
 
 Pour suivre cette formation dans de bonnes conditions, il est recommandé de :
 
@@ -72,67 +70,67 @@ Pour suivre cette formation dans de bonnes conditions, il est recommandé de :
 
 ---
 
-## Contenu pédagogique (indicatif)
+## 🎓 Contenu pédagogique
 
-### 1. Introduction aux systèmes de messagerie
+### 🧩 1. Introduction aux systèmes de messagerie
 - Rôle et enjeux de la messagerie en entreprise
 - Messagerie électronique vs messagerie instantanée
 - Architecture générale d’un système de messagerie
     
 
-### 2. Protocoles de messagerie
+### 🌐 2. Protocoles de messagerie
 - SMTP : fonctionnement et flux d’envoi
 - POP3 et IMAP : principes, différences et usages
 - Protocoles de messagerie instantanée (XMPP, Matrix – notions)
 - DNS et messagerie : MX, TXT, PTR
     
-**TP :**
+**🖥️ TP :**
 - Visualisation des échanges SMTP, POP3, IMAP
 - Capture et analyse de flux réseau liés à la messagerie
     
 
-### 3. Analyse et manipulation des e-mails
+### 🔍 3. Analyse et manipulation des e-mails
 - Structure d’un e-mail (RFC, MIME)
 - Analyse détaillée des en-têtes
 - Détection d’anomalies et d’usurpations
     
 
-**TP :**
+**🖥️ TP :**
 - Analyse d’en-têtes d’e-mails réels
 - Identification de tentatives de spoofing
 - Falsification d’en-têtes à des fins pédagogiques
     
 
-### 4. Sécurisation de la messagerie
+### 🔐 4. Sécurisation de la messagerie
 - Authentification et contrôle d’accès
 - TLS et chiffrement des communications
 - Chiffrement de bout en bout (S/MIME, PGP – notions)
 - Gestion des identités et des accès
 
-**TP :**
+**🖥️ TP :**
 - Mise en place d’une authentification forte (MFA)
 - Sécurisation des flux de messagerie
     
 
-### 5. Mécanismes de confiance et lutte contre l’usurpation
+### 🛠️ 5. Mécanismes de confiance et lutte contre l’usurpation
 - SPF : principes et configuration
 - DKIM : signature et validation
 - DMARC : politiques et reporting
     
 
-**TP :**
+**🖥️ TP :**
 - Configuration complète SPF / DKIM / DMARC
 - Vérification et tests de conformité
     
 
-### 6. Garanties de sécurité des échanges  
+### 🔐 6. Garanties de sécurité des échanges  
 - Confidentialité des données  
 - Intégrité des messages  
 - Non-répudiation  
 - Traçabilité et journalisation  
     
 
-### 7. Défense en profondeur appliquée à la messagerie
+### 🧱 7. Défense en profondeur appliquée à la messagerie
 
 - Superposition des couches de sécurité
 - Filtrage, détection et supervision
@@ -141,7 +139,7 @@ Pour suivre cette formation dans de bonnes conditions, il est recommandé de :
 
 ---
 
-## Méthodes pédagogiques
+## 📖 Méthodes pédagogiques
 
 - Apports théoriques illustrés
 - Travaux pratiques guidés et progressifs
@@ -151,7 +149,7 @@ Pour suivre cette formation dans de bonnes conditions, il est recommandé de :
 
 ---
 
-## Certifications et débouchés possibles
+## 🔑 Certifications et débouchés possibles
 
 À l’issue de cette formation, les participants auront acquis des compétences utiles pour préparer ou renforcer des certifications telles que :
 
