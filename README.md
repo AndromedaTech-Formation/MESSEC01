@@ -1,7 +1,7 @@
-![MESSEC01 Banner](https://i.ibb.co/LD9L4Dwz/Pasted-image-20251215142034.png)
+![banner](https://i.ibb.co/DPgFW2mD/banner2.png)
 
 
-# ✉️ MESSEC01 : Messagerie sécurisée et contrôle d'accès
+# 📬 MESSEC01 : Messagerie sécurisée et contrôle d'accès
 **Mise en œuvre et sécurisation d’une messagerie électronique et instantanée – Fondamentaux, protocoles et défense en profondeur**
 
 **Durée :** 20 heures  
@@ -86,7 +86,7 @@ Pour suivre cette formation dans de bonnes conditions, il est recommandé de :
     
 **🖥️ TP :**
 - Visualisation des échanges SMTP, POP3, IMAP
-- Capture et analyse de flux réseau liés à la messagerie
+- Analyse des en-têtes de mails pour en déterminer le cheminement
     
 
 ### 🔍 3. Analyse et manipulation des e-mails
@@ -96,8 +96,8 @@ Pour suivre cette formation dans de bonnes conditions, il est recommandé de :
     
 
 **🖥️ TP :**
-- Analyse d’en-têtes d’e-mails réels
-- Identification de tentatives de spoofing
+- Analyse fine d’en-têtes d’e-mails réels et complexes
+- Utilisation d'outils dédiés
 - Falsification d’en-têtes à des fins pédagogiques
     
 
@@ -108,8 +108,8 @@ Pour suivre cette formation dans de bonnes conditions, il est recommandé de :
 - Gestion des identités et des accès
 
 **🖥️ TP :**
-- Mise en place d’une authentification forte (MFA)
-- Sécurisation des flux de messagerie
+- Mise en place d'un serveur de messagerie Postfix avec Dovecot sur Debian 13
+- Compréhension et mise en oeuvre des protocoles de base (DNS, SMTP, IMAP, POP3) 
     
 
 ### 🛠️ 5. Mécanismes de confiance et lutte contre l’usurpation
@@ -119,7 +119,7 @@ Pour suivre cette formation dans de bonnes conditions, il est recommandé de :
     
 
 **🖥️ TP :**
-- Configuration complète SPF / DKIM / DMARC
+- Configuration complète SPF / DKIM / DMARC pour sécuriser le domaine contre l'usurpation
 - Vérification et tests de conformité
     
 
@@ -127,7 +127,10 @@ Pour suivre cette formation dans de bonnes conditions, il est recommandé de :
 - Confidentialité des données  
 - Intégrité des messages  
 - Non-répudiation  
-- Traçabilité et journalisation  
+- Traçabilité et journalisation
+
+**🖥️ TP :**
+- Mise en oeuvre d'une authentification forte (MFA) sur un serveur Web
     
 
 ### 🧱 7. Défense en profondeur appliquée à la messagerie
@@ -137,6 +140,9 @@ Pour suivre cette formation dans de bonnes conditions, il est recommandé de :
 - Sensibilisation des utilisateurs
 - Bonnes pratiques opérationnelles
 
+**🖥️ TP :**
+- Contournement de l'authentification forte (MFA) mise en oeuvre au chapitre précédent en exploitant une vulnérabilité
+    
 ---
 
 ## 📖 Méthodes pédagogiques
@@ -163,9 +169,9 @@ Pour suivre cette formation dans de bonnes conditions, il est recommandé de :
 
 ---
 
-Formation réalisée par AndromedaTech formation 
+Formation réalisée par AndromedaTech Formation 
 
-**Copyright 2025 AndromedaTech formation - Tous droits réservés**  
+**Copyright 2025 AndromedaTech Formation - Tous droits réservés**  
 _Les images, icônes, logos, marques déposées, ainsi que les contenus proposés par des liens hypertextes comme source de documentation annexe appartiennent à leurs auteurs respectifs._
 
 
