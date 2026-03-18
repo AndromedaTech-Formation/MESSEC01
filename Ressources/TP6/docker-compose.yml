@@ -1,0 +1,24 @@
+version: "3"
+
+services:
+
+  synapse:
+    image: matrixdotorg/synapse:latest
+    container_name: matrix-synapse
+    restart: unless-stopped
+    volumes:
+      - ./synapse:/data
+    ports:
+      - "8008:8008"
+    environment:
+      - SYNAPSE_SERVER_NAME=abriXX.vault-tec.tech
+      - SYNAPSE_REPORT_STATS=no
+
+  element:
+    image: vectorim/element-web:latest
+    container_name: element-web
+    restart: unless-stopped
+    ports:
+      - "8080:80"
+    volumes:
+      - ./config.json:/app/config.json
