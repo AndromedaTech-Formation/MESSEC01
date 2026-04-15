@@ -1,0 +1,3 @@
+#!/bin/bash
+echo -e "Mise à jour du lab terminée"
+exit 0
