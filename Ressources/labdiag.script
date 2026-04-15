@@ -1,0 +1,177 @@
+#!/bin/bash
+
+# Vérification des droits root
+if [ "$(id -u)" -ne 0 ]; then
+    echo -e "\e[31mCe script doit être exécuté en tant que root\e[0m" >&2
+    exit 1
+fi
+
+# Définition des couleurs
+GREEN='\033[32m'
+RED='\033[31m'
+YELLOW='\033[33m'
+BLUE='\033[34m'
+CYAN='\033[36m'
+NC='\033[0m' # No Color
+
+# Fonction pour afficher un séparateur de tableau
+print_table_separator() {
+    printf "+------------------------------------------+----------------------------------------------------+\n"
+}
+
+# Fonction pour vérifier l'état d'un service
+check_service() {
+    local service=$1
+    if systemctl is-active --quiet "$service"; then
+        printf "| %-40s | ${GREEN}%-50s${NC} |\n" "$service" "✓ Fonctionne"
+    else
+        printf "| %-40s | ${RED}%-50s${NC} |\n" "$service" "✗ Ne fonctionne pas"
+    fi
+}
+
+# Fonction pour vérifier l'existence d'un fichier
+check_file() {
+    local file=$1
+    if [ -f "$file" ]; then
+        printf "| %-40s | ${GREEN}%-50s${NC} |\n" "$file" "✓ Existe"
+    else
+        printf "| %-40s | ${RED}%-50s${NC} |\n" "$file" "✗ N'existe pas"
+    fi
+}
+
+# Fonction pour exécuter une commande et afficher le résultat
+run_command() {
+    local desc=$1
+    local cmd=$2
+    local output
+
+    # Cas spécial pour ping
+    if [[ "$cmd" == *"ping"* ]]; then
+        output=$(ping -c 5 google.com 2>&1 | head -n 2)
+    else
+        output=$($cmd 2>&1)
+    fi
+
+    if [ -z "$output" ]; then
+        printf "| %-40s | ${RED}%-50s${NC} |\n" "$desc" "Aucun résultat"
+    else
+        # Limiter la taille de la sortie
+        if [ ${#output} -gt 50 ]; then
+            output="${output:0:47}..."
+        fi
+        printf "| %-40s | ${GREEN}%-50s${NC} |\n" "$desc" "$output"
+    fi
+}
+
+# Récupération du nom de domaine
+DOMAINNAME=$(domainname)
+if [ "$DOMAINNAME" = "(none)" ] || [ -z "$DOMAINNAME" ]; then
+    DOMAINNAME=$(hostname -d)
+    if [ -z "$DOMAINNAME" ]; then
+        DOMAINNAME="domaine.inconnu"
+    fi
+fi
+
+# Affichage des informations système
+echo -e "\n${BLUE}=== INFORMATIONS SYSTÈME ===${NC}"
+print_table_separator
+printf "| %-40s | ${GREEN}%-50s${NC} |\n" "Nom de la machine" "$(hostname)"
+printf "| %-40s | ${GREEN}%-50s${NC} |\n" "Nom de domaine" "$DOMAINNAME"
+
+# Affichage des IPs des interfaces
+for interface in enp0s3 enp0s8; do
+    ip=$(ip -4 addr show $interface 2>/dev/null | grep -oP '(?<=inet\s)\d+(\.\d+){3}' | head -n 1)
+    if [ -n "$ip" ]; then
+        printf "| %-40s | ${GREEN}%-50s${NC} |\n" "IP de $interface" "$ip"
+    else
+        printf "| %-40s | ${RED}%-50s${NC} |\n" "IP de $interface" "Non configurée"
+    fi
+done
+
+# Vérification de l'activation d'IPv6
+if sysctl net.ipv6.conf.all.disable_ipv6 | grep -q "= 0"; then
+    printf "| %-40s | ${RED}%-50s${NC} |\n" "IPv6" "Activé"
+else
+    printf "| %-40s | ${GREEN}%-50s${NC} |\n" "IPv6" "Désactivé"
+fi
+print_table_separator
+
+# Vérification des services
+echo -e "\n${BLUE}=== ÉTAT DES SERVICES ===${NC}"
+print_table_separator
+printf "| %-40s | ${CYAN}%-50s${NC} |\n" "Service" "État"
+print_table_separator
+check_service "bind9"
+check_service "dovecot"
+check_service "postfix"
+check_service "networking"
+check_service "opendkim"
+print_table_separator
+
+# Exécution des commandes demandées
+echo -e "\n${BLUE}=== RÉSULTATS DES COMMANDES ===${NC}"
+print_table_separator
+printf "| %-40s | ${CYAN}%-50s${NC} |\n" "Commande" "Résultat"
+print_table_separator
+run_command "host -t txt vault-tec.tech" "host -t txt vault-tec.tech"
+run_command "dig vault-tec.tech txt +short" "dig vault-tec.tech txt +short"
+run_command "ping google.com (5 paquets)" "ping -c 5 google.com"
+
+# Vérification DKIM
+echo -e "${YELLOW}opendkim-testkey -d vault-tec.tech -s default -vvv:${NC}"
+if command -v opendkim-testkey >/dev/null 2>&1; then
+    output=$(opendkim-testkey -d vault-tec.tech -s default -vvv 2>&1)
+    if [ -z "$output" ]; then
+        printf "| %-40s | ${RED}%-50s${NC} |\n" "opendkim-testkey" "Aucun résultat"
+    else
+        output=$(echo "$output" | tail -n 3)
+        if [ ${#output} -gt 50 ]; then
+            output="${output:0:47}..."
+        fi
+        printf "| %-40s | ${GREEN}%-50s${NC} |\n" "opendkim-testkey" "$output"
+    fi
+else
+    printf "| %-40s | ${RED}%-50s${NC} |\n" "opendkim-testkey" "Commande non installée"
+fi
+
+run_command "dig TXT default._domainkey.$DOMAINNAME" "dig TXT \"default._domainkey.$DOMAINNAME\" +short"
+run_command "dig TXT _dmarc.$DOMAINNAME" "dig TXT \"_dmarc.$DOMAINNAME\" +short"
+print_table_separator
+
+# Vérification des permissions du fichier DKIM
+echo -e "\n${BLUE}=== VÉRIFICATION DKIM ===${NC}"
+print_table_separator
+if [ -f "/etc/dkimkeys/default.private" ]; then
+    current_perms=$(stat -c "%a" /etc/dkimkeys/default.private)
+    if [ "$current_perms" != "600" ]; then
+        printf "| %-40s | ${YELLOW}%-50s${NC} |\n" "Permissions DKIM" "Incorrectes ($current_perms)"
+        chmod 600 /etc/dkimkeys/default.private
+        printf "| %-40s | ${GREEN}%-50s${NC} |\n" "Correction" "Permissions mises à 600"
+    else
+        printf "| %-40s | ${GREEN}%-50s${NC} |\n" "Permissions DKIM" "Correctes (600)"
+    fi
+else
+    printf "| %-40s | ${RED}%-50s${NC} |\n" "Fichier DKIM" "N'existe pas"
+fi
+print_table_separator
+
+# Vérification des fichiers
+echo -e "\n${BLUE}=== VÉRIFICATION DES FICHIERS ===${NC}"
+print_table_separator
+printf "| %-40s | ${CYAN}%-50s${NC} |\n" "Fichier" "État"
+print_table_separator
+check_file "/etc/dovecot/passwd"
+check_file "/etc/dovecot/conf.d/dovecot.conf"
+check_file "/etc/postfix/virtual"
+check_file "/etc/ssl/certs/$DOMAINNAME.csr"
+check_file "/etc/ssl/certs/$DOMAINNAME.crt"
+check_file "/etc/ssl/cacert.pem"
+check_file "/etc/ssl/private/$DOMAINNAME.key"
+check_file "/etc/bind/db.$DOMAINNAME"
+check_file "/etc/bind/db.reverse.$DOMAINNAME"
+check_file "/etc/dkimkeys/default.private"
+check_file "/etc/bind/default.txt"
+print_table_separator
+
+echo -e "\n${GREEN}Analyse terminée.${NC}\n"
+exit 0
