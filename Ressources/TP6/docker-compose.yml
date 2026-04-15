@@ -11,7 +11,7 @@ services:
     ports:
       - "8008:8008"
     environment:
-      - SYNAPSE_SERVER_NAME=abriXX.vault-tec.tech
+      - SYNAPSE_SERVER_NAME=abriXX.tech
       - SYNAPSE_REPORT_STATS=no
 
   element:
