@@ -4,7 +4,7 @@
 # 📬 MESSEC01 : Messagerie sécurisée et contrôle d'accès
 **Mise en œuvre et sécurisation d’une messagerie électronique et instantanée – Fondamentaux, protocoles et défense en profondeur**
 
-**Durée :** 20 heures  
+**Durée :** 30 heures  
 **Niveau visé :** Autonomie  
 **Modalité :** Présentiel ou distanciel avec environnement de travaux pratiques  
 **Alternance :** Apports théoriques et travaux pratiques
