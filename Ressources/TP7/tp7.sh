@@ -59,8 +59,8 @@ git clone https://github.com/AndromedaTech-Formation/oauth-labs
 cd oauth-labs
 mv Makefile Makefile.old
 mv docker-compose.yaml docker-compose.yaml.old
-curl -fsSL https://raw.githubusercontent.com/AndromedaTech-Formation/MESSEC01/main/Ressources/TP7/Makefile -o /root/oauth-labs/Makefile
-curl -fsSL https://raw.githubusercontent.com/AndromedaTech-Formation/MESSEC01/main/Ressources/TP7/docker-compose.yaml -o /root/oauth-labs/docker-compose.yaml
+curl -fsSL https://raw.githubusercontent.com/AndromedaTech-Formation/MESSEC01/main/Ressources/TP7/Makefile -o Makefile
+curl -fsSL https://raw.githubusercontent.com/AndromedaTech-Formation/MESSEC01/main/Ressources/TP7/docker-compose.yaml -o docker-compose.yaml
 echo -e "${CYAN} >>>>>> PREPARATION DU LAB... cela peut prendre quelques minutes... ${NC}"
 echo '172.16.16.1 oauth.labs' >> /etc/hosts
 echo '172.16.16.1 server-02.oauth.labs server-02' >> /etc/hosts
