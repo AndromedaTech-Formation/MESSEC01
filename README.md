@@ -142,6 +142,18 @@ Pour suivre cette formation dans de bonnes conditions, il est recommandé de :
 
 **🖥️ TP :**
 - Contournement de l'authentification forte (MFA) mise en oeuvre au chapitre précédent en exploitant une vulnérabilité
+
+### 🧱 8. L'authentification sécurisée avec OAuth et OpenID
+
+- Usage et fonctionnement de OAuth 2.0
+- Usage et fonctionnement d'OpenID Connect
+- Moyens mis en oeuvre de manière autonome au sein d'un réseau d'entreprise
+- Surcouches de sécurité et revue des vulnérabilités les plus courantes
+
+**🖥️ TP :**
+- Installation d'un serveur OAuth et manipulation des jetons d'accès avec l'outil _Burp Suite_
+
+
     
 ---
 
